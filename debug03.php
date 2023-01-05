@@ -1,4 +1,5 @@
 <?php // phpcs:ignore
+ini_set('display_errors', "On");
 
 // デバック練習問題
 // コードを読みデバックしつつジャンケンゲームを完成させてください。
@@ -87,7 +88,7 @@ class Battle // phpcs:ignore
         $this->second = $enemy->getChoice();
     }
 
-    public function judge(): string
+    private function judge(): string
     {
         if ($this->first === $this->second) {
             return '引き分け';
@@ -126,10 +127,10 @@ class Battle // phpcs:ignore
         return $_SESSION['result'];
     }
 
-    // public function getVitories()
-    // {
-    //     return $_SESSION['result'];
-    // }
+    public function getVictories()
+    {
+        return $this->countVictories();
+    }
 
     public function showResult()
     {
@@ -148,7 +149,7 @@ if (!empty($_POST)) {
     echo '勝敗は'.$battle->showResult().'です。';
     if ($battle->showResult() === '勝ち') {
         echo '<br>';
-        echo $battle->countVictories().'回目の勝利です。';
+        echo $battle->getVictories().'回目の勝利です。';
     }
 }
 
